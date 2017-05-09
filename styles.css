@@ -16,6 +16,8 @@
 
  /* CUSTOM */
 
+ /* -- GRID */
+
  /* -- Tabs */
 .mdl-layout.is-upgraded .mdl-layout__tab.is-active {
     color: rgb(255, 255, 255);
@@ -23,6 +25,47 @@
 
 .mdl-layout--fixed-tabs .mdl-layout__tab {
     color: #969696;
+}
+
+/* -- Divs */
+
+.main-box {
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding-left: 8px;
+    padding-top: 4px;
+    color: #868383;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.main-header{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.main-header h1{
+    font-family: Roboto Light, "Helvetica", san-serif;
+    line-height: 1.5em;
+    color: #5d5d5d;
+    font-size: 30px;
+}
+
+.main-header h1:after {
+    content:' ';
+    display:block;
+    border:1px solid black;
+    margin-right: 5px;
+}
+
+.main-body {
+  height: 500px;
+  margin: 20px;
+}
+
+/* -- Buttons */
+
+.footer-button {
+  width: 100%;
 }
 
  /* END */
@@ -56,7 +99,7 @@ html, body {
 .demo-drawer {
   border: none;
 }
-.mdl-layout-title{
+.mdl-le{
     padding: 10px;
     background: #444444;
     border-radius: 5px;

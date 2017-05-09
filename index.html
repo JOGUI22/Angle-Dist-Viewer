@@ -21,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Material Design Lite</title>
+    <title>Angle Dist Viewer</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -61,7 +61,7 @@
     </style>
   </head>
   <body>
-    <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-tabs">
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header mdl-layout--fixed-tabs">
       <header class="mdl-layout__header mdl-layout__header--transparent mdl-color-text--white-600">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Home</span>
@@ -126,14 +126,52 @@
       <main class="mdl-layout__content mdl-color--grey-100">
         <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
           <div class="page-content">
-            <p>JORDI</p>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--12-col main-box">
+                <div class="main-header">
+                  <h1> Angle - Distance </h1>
+                </div>
+                <div id="d3-plot-dist-ang" class="main-body">
+ 
+                </div>
+                <div class="main-footer">
+                  <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col">
+                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                        File of Distances
+                      </button>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                        File of Angles
+                      </button>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                        Generate Plot
+                      </button>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- Your content goes here -->
           </div>
         </section>
         <section class="mdl-layout__tab-panel" id="fixed-tab-2">
           <div class="page-content">
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--12-col main-box">
+                <div class="main-header">
+                  <h1> Angle - Dual Distances </h1>
+                </div>
+                <div class="main-body">
+                </div>
+                <div class="main-footer">
+                </div>
+              </div>
+            </div>
             <!-- Your content goes here -->
-            <p>GUILLEM</p>
           </div>
         </section>
       </main>
