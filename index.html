@@ -59,6 +59,11 @@
       z-index: 900;
     }
     </style>
+
+    <!-- Javascript code -->
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="js/plots.js"></script>
   </head>
   <body>
     <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header mdl-layout--fixed-tabs">
@@ -137,17 +142,19 @@
                 <div class="main-footer">
                   <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--4-col">
-                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                      <input type="file" id="input-plot1-fd">
+                      <button id="plot1-fd" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
                         File of Distances
                       </button>
                     </div>
                     <div class="mdl-cell mdl-cell--4-col">
-                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                      <input type="file" id="input-plot1-fa">
+                      <button id="plot1-fa" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
                         File of Angles
                       </button>
                     </div>
                     <div class="mdl-cell mdl-cell--4-col">
-                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                      <button id="plot1-gp" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
                         Generate Plot
                       </button>
                     </div> 
