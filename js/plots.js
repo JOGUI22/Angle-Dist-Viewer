@@ -114,7 +114,7 @@ function generatePlot1(){
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Distance (mm)'
+                text: 'Distance (Å)'
             },
             startOnTick: true,
             endOnTick: true,
@@ -148,7 +148,7 @@ function generatePlot1(){
                 },
                 tooltip: {
                     headerFormat: 'Molecule: ',
-                    pointFormat: '{point.x} mm, {point.y} º'
+                    pointFormat: '{point.x} Å, {point.y} º'
                 }
             }
          },
@@ -257,7 +257,7 @@ function generatePlot2  (){
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Distance (mm)'
+                text: 'Distance (Å)'
             },
             startOnTick: true,
             endOnTick: true,
@@ -291,7 +291,7 @@ function generatePlot2  (){
                 },
                 tooltip: { //http://jsfiddle.net/TkMjZ/214/
                     headerFormat: 'Molecule: ',
-                    pointFormat: '{point.x} mm, {point.y} º'
+                    pointFormat: '{point.x} Å, {point.y} º'
                 }
             }
          },
@@ -442,7 +442,7 @@ function generatePlot3  (){
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Distance (mm)'
+                text: 'Distance (Å)'
             },
             min: 0,
             max: thresholdDist
@@ -456,7 +456,7 @@ function generatePlot3  (){
         },
         zAxis: {
             title: {
-                text: 'Distance (mm)'
+                text: 'Distance (Å)'
             },
             min: 0,
             max: thresholdDist,
