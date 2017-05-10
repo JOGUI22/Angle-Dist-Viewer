@@ -1,4 +1,6 @@
 //Global variables
+var oneTime = false;
+
 //Plot1
 var p1 = {
     distFile : null,
@@ -20,10 +22,9 @@ var p3 = {
 }
 
 $( document ).ready(function() {
-
    registerEventsP1();
    registerEventsP2();
-
+   registerEventsP3();
 });
 
 //FUNCTIONS
@@ -101,7 +102,7 @@ function generatePlot1(){
     
 
     //Create chart
-    var myChart = Highcharts.chart('d3-plot-dist-ang', {
+    var myChart1 = Highcharts.chart('d3-plot-dist-ang', {
          chart: {
             type: 'scatter',
             zoomType: 'xy',
@@ -232,7 +233,7 @@ function generatePlot2  (){
     for(var i = 0; i < p2.distFile1.length; i++){
         var sumDistTemp = p2.distFile1[i][1] + p2.distFile2[i][1];
         if(sumDistTemp <= thresholdDist && p2.angleFile[i][1] <= thresholdAngle){
-            dataset[0].data.push([sumDistTemp,p2.angleFile[i][1],p2.distFile1[i][1],p2.distFile2[i][1]])
+            dataset[0].data.push([sumDistTemp,p2.angleFile[i][1]])
             sumDist = sumDist + sumDistTemp;
             sumAngle = sumAngle + p2.angleFile[i][1];
         }   
@@ -244,7 +245,7 @@ function generatePlot2  (){
     
 
     //Create chart
-    var myChart = Highcharts.chart('d3-plot-distsum-ang', {
+    var myChart2 = Highcharts.chart('d3-plot-distsum-ang', {
          chart: {
             type: 'scatter',
             zoomType: 'xy',
@@ -304,6 +305,208 @@ function generatePlot2  (){
 }
 
 //Plot3
+
+function registerEventsP3(){
+    //Register buttons
+    $('#plot3-fd1').click(function(){
+        $('#input-plot3-fd1').click();
+    });
+     $('#plot3-fd2').click(function(){
+        $('#input-plot3-fd2').click();
+    });
+    $('#plot3-fa').click(function(){
+        $('#input-plot3-fa').click();
+    });
+    $('#plot3-gp').click(function(){
+        if(p3.distFile1.length > 1 && p3.distFile2.length > 1 && p3.angleFile.length > 1){
+            generatePlot3();
+        }
+    });
+
+    //input files
+    $('#input-plot3-fd1').change(function(e){
+        var file = e.target.files[0];
+        readFileAndParseMatrix(file,function(matrix){
+            p3.distFile1 = parseTextAsMatrix(matrix)
+        })
+    });
+    $('#input-plot3-fd2').change(function(e){
+        var file = e.target.files[0];
+        readFileAndParseMatrix(file,function(matrix){
+            p3.distFile2 = parseTextAsMatrix(matrix)
+        })
+    });
+    $('#input-plot3-fa').change(function(e){
+        var file = e.target.files[0];
+        readFileAndParseMatrix(file,function(matrix){
+            p3.angleFile = parseTextAsMatrix(matrix)
+        })
+    });
+}
+
+function generatePlot3  (){
+    //https://www.highcharts.com/docs/getting-started/your-first-chart
+    //Parse elements
+    var dataset = [{
+        name: 'Points',
+        colorByPoint: true,
+        data: []
+    }];
+    var thresholdDist, thresholdAngle, pointRadius;
+    var sumDist = 0;
+    var sumAngle = 0;
+    if($("#plot3-thresholdDist").val().trim().length === 0){
+        thresholdDist = 20;
+    }else{
+        thresholdDist = $("#plot3-thresholdDist").val();
+    }
+
+    if($("#plot3-thresholdAngle").val().trim().length === 0){
+        thresholdAngle = 30;
+    }else{
+        thresholdAngle = $("#plot3-thresholdAngle").val();
+    }
+
+    if($("#plot3-radius").val().trim().length === 0){
+        pointRadius = 5;
+    }else{
+        pointRadius = $("#plot3-radius").val();
+    }
+
+    for(var i = 0; i < p3.distFile1.length; i++){
+        var sumDistTemp = p3.distFile1[i][1] + p3.distFile2[i][1];
+        if(sumDistTemp <= thresholdDist && p3.angleFile[i][1] <= thresholdAngle){
+            dataset[0].data.push([p3.distFile1[i][1],p3.angleFile[i][1],p3.distFile2[i][1]])
+            sumDist = sumDist + sumDistTemp;
+            sumAngle = sumAngle + p3.angleFile[i][1];
+        }   
+    }
+
+    var count = dataset[0].data.length;
+    var meanDist = sumDist / count;
+    var meanAngle = sumAngle / count; 
+
+    if(!oneTime){
+        // Give the points a 3D feel by adding a radial gradient
+        Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function (color) {
+            return {
+                radialGradient: {
+                    cx: 0.4,
+                    cy: 0.3,
+                    r: 0.5
+                },
+                stops: [
+                    [0, color],
+                    [1, Highcharts.Color(color).brighten(-0.2).get('rgb')]
+                ]
+            };
+        });
+        oneTime = true;
+    }
+
+    //Create chart
+    var myChart3 = new Highcharts.Chart({
+         chart: {
+            animation: true,
+            renderTo: 'd3-plot-dist-dist-ang',
+            margin: 100,
+            type: 'scatter',
+            options3d: {
+                enabled: true,
+                alpha: 10,
+                beta: 30,
+                depth: 250,
+                viewDistance: 5,
+                fitToPlot: false,
+                frame: {
+                    bottom: { size: 1, color: 'rgba(0,0,0,0.02)' },
+                    back: { size: 1, color: 'rgba(0,0,0,0.04)' },
+                    side: { size: 1, color: 'rgba(0,0,0,0.06)' }
+                }
+            }  
+        },
+        title: {
+            text: 'Sum of Distances / Angle'
+        },
+        subtitle: {
+            text: 'Click and drag the plot area to rotate in space'
+        },
+        plotOptions: {
+            scatter: {
+                animation: true,
+                width: thresholdDist,
+                height: thresholdAngle,
+                depth: thresholdDist
+            }
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Distance (mm)'
+            },
+            min: 0,
+            max: thresholdDist
+        },
+        yAxis: {
+            title: {
+                text: 'Angle (º)'
+            },
+            min: 0,
+            max: thresholdAngle
+        },
+        zAxis: {
+            title: {
+                text: 'Distance (mm)'
+            },
+            min: 0,
+            max: thresholdDist,
+        },
+         plotOptions: {
+            scatter: {
+                animation: true,
+                marker: {
+                    radius: pointRadius
+                }
+            }
+         },
+        series: dataset
+    });
+
+    //Results:
+    $("#plot3-count").text("Count: " + count);
+    $("#plot3-meanDist").text("Mean Distance: " + meanDist.toFixed(4));
+    $("#plot3-meanAngle").text("Mean Angle: " + meanAngle.toFixed(4));
+
+    // Add mouse events for rotation
+    $(myChart3.container).on('mousedown.hc touchstart.hc', function (eStart) {
+        eStart = myChart3.pointer.normalize(eStart);
+
+        var posX = eStart.pageX,
+            posY = eStart.pageY,
+            alpha = myChart3.options.chart.options3d.alpha,
+            beta = myChart3.options.chart.options3d.beta,
+            newAlpha,
+            newBeta,
+            sensitivity = 5; // lower is more sensitive
+
+        $(document).on({
+            'mousemove.hc touchdrag.hc': function (e) {
+                // Run beta
+                newBeta = beta + (posX - e.pageX) / sensitivity;
+                myChart3.options.chart.options3d.beta = newBeta;
+
+                // Run alpha
+                newAlpha = alpha + (e.pageY - posY) / sensitivity;
+                myChart3.options.chart.options3d.alpha = newAlpha;
+
+                myChart3.redraw(false);
+            },
+            'mouseup touchend': function () {
+                $(document).off('.hc');
+            }
+        });
+    });
+}
 
 //-- Utils
 

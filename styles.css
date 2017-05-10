@@ -72,10 +72,15 @@ input{
   margin: 0 0 0 0px;
 }
 
+.mdl-textfield {
+  width: 500px;
+}
 /* -- Buttons */
 
 .footer-button {
   width: 100%;
+  font-size: 12px;
+  line-height: 12px;
 }
 
  /* END */

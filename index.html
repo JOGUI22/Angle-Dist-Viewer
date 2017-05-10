@@ -62,13 +62,14 @@
 
     <!-- Javascript code -->
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="js/plots.js"></script>
   </head>
   <body>
-    <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header mdl-layout--fixed-tabs">
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
       <header class="mdl-layout__header mdl-layout__header--transparent mdl-color-text--white-600">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Home</span>
@@ -218,13 +219,13 @@
                           <label class="mdl-textfield__label">Sum Dist. Threshold (default : 20)</label>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell-43-col">
+                    <div class="mdl-cell mdl-cell-4-col">
                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                           <input id="plot2-thresholdAngle" class="mdl-textfield__input" type="text" />
                           <label class="mdl-textfield__label">Angle Threshold (default : 50)</label>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--3-col">
+                    <div class="mdl-cell mdl-cell--4-col">
                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                           <input id="plot2-radius" class="mdl-textfield__input" type="text" />
                           <label class="mdl-textfield__label">Radius (default : 5)</label>
@@ -267,11 +268,67 @@
             <div class="mdl-grid">
               <div class="mdl-cell mdl-cell--12-col main-box">
                 <div class="main-header">
-                  <h1> Angle - Dual Distances </h1>
+                  <h1> Angle - Two Distances </h1>
                 </div>
-                <div class="main-body">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col">
+                      <p id="plot3-count">Count: </p>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                      <p id="plot3-meanDist">Mean Sum of Distances: </p>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                      <p id="plot3-meanAngle">Mean Angle: </p>
+                    </div>
+                </div>
+                <div id="d3-plot-dist-dist-ang" class="main-body">
                 </div>
                 <div class="main-footer">
+                  <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col">
+                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input id="plot3-thresholdDist" class="mdl-textfield__input" type="text" />
+                          <label class="mdl-textfield__label">Sum. Dist. Threshold (default : 20)</label>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell-4-col">
+                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input id="plot3-thresholdAngle" class="mdl-textfield__input" type="text" />
+                          <label class="mdl-textfield__label">Angle Threshold (default : 30)</label>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input id="plot3-radius" class="mdl-textfield__input" type="text" />
+                          <label class="mdl-textfield__label">Radius (default : 5)</label>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--3-col">
+                      <input type="file" id="input-plot3-fd1">
+                      <button id="plot3-fd1" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                        File of Distances 1
+                      </button>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col">
+                      <input type="file" id="input-plot3-fd2">
+                      <button id="plot3-fd2" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                        File of Distances 2
+                      </button>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col">
+                      <input type="file" id="input-plot3-fa">
+                      <button id="plot3-fa" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                        File of Angles
+                      </button>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col">
+                      <button id="plot3-gp" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect footer-button">
+                        Generate Plot
+                      </button>
+                    </div> 
+                  </div>
                 </div>
               </div>
             </div>
