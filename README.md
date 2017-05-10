@@ -1,6 +1,6 @@
 # Angle-Dist-Viewer (BioTech plots from supercomputer .log frames)
 
-Marathon project to plot specific .logs in an easy way.
+Marathon project to plot and merge .log files (Lists of *frame* - *value* pairs) in an easy way.
 
 **Completed in:** 8 hours
 
