@@ -22,6 +22,7 @@ var p3 = {
 $( document ).ready(function() {
 
    registerEventsP1();
+   registerEventsP2();
 
 });
 
@@ -160,6 +161,147 @@ function generatePlot1(){
 }
 
 //Plot2
+
+function registerEventsP2(){
+    //Register buttons
+    $('#plot2-fd1').click(function(){
+        $('#input-plot2-fd1').click();
+    });
+     $('#plot2-fd2').click(function(){
+        $('#input-plot2-fd2').click();
+    });
+    $('#plot2-fa').click(function(){
+        $('#input-plot2-fa').click();
+    });
+    $('#plot2-gp').click(function(){
+        if(p2.distFile1.length > 1 && p2.distFile2.length > 1 && p2.angleFile.length > 1){
+            generatePlot2();
+        }
+    });
+
+    //input files
+    $('#input-plot2-fd1').change(function(e){
+        var file = e.target.files[0];
+        readFileAndParseMatrix(file,function(matrix){
+            p2.distFile1 = parseTextAsMatrix(matrix)
+        })
+    });
+    $('#input-plot2-fd2').change(function(e){
+        var file = e.target.files[0];
+        readFileAndParseMatrix(file,function(matrix){
+            p2.distFile2 = parseTextAsMatrix(matrix)
+        })
+    });
+    $('#input-plot2-fa').change(function(e){
+        var file = e.target.files[0];
+        readFileAndParseMatrix(file,function(matrix){
+            p2.angleFile = parseTextAsMatrix(matrix)
+        })
+    });
+}
+
+function generatePlot2  (){
+    //https://www.highcharts.com/docs/getting-started/your-first-chart
+    //Parse elements
+    var dataset = [{
+        name: 'Points',
+        color: 'rgba(223, 83, 83, .5)',
+        data: []
+    }];
+    var thresholdDist, thresholdAngle, pointRadius;
+    var sumDist = 0;
+    var sumAngle = 0;
+    if($("#plot2-thresholdDist").val().trim().length === 0){
+        thresholdDist = 20;
+    }else{
+        thresholdDist = $("#plot2-thresholdDist").val();
+    }
+
+    if($("#plot2-thresholdAngle").val().trim().length === 0){
+        thresholdAngle = 30;
+    }else{
+        thresholdAngle = $("#plot2-thresholdAngle").val();
+    }
+
+    if($("#plot2-radius").val().trim().length === 0){
+        pointRadius = 5;
+    }else{
+        pointRadius = $("#plot2-radius").val();
+    }
+
+    for(var i = 0; i < p2.distFile1.length; i++){
+        var sumDistTemp = p2.distFile1[i][1] + p2.distFile2[i][1];
+        if(sumDistTemp <= thresholdDist && p2.angleFile[i][1] <= thresholdAngle){
+            dataset[0].data.push([sumDistTemp,p2.angleFile[i][1],p2.distFile1[i][1],p2.distFile2[i][1]])
+            sumDist = sumDist + sumDistTemp;
+            sumAngle = sumAngle + p2.angleFile[i][1];
+        }   
+    }
+
+    var count = dataset[0].data.length;
+    var meanDist = sumDist / count;
+    var meanAngle = sumAngle / count; 
+    
+
+    //Create chart
+    var myChart = Highcharts.chart('d3-plot-distsum-ang', {
+         chart: {
+            type: 'scatter',
+            zoomType: 'xy',
+            animation: true  
+        },
+        title: {
+            text: 'Sum of Distances / Angle'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Distance (mm)'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true,
+            max: thresholdDist
+        },
+        yAxis: {
+            title: {
+                text: 'Angle (º)'
+            },
+            max: thresholdAngle
+        },
+         plotOptions: {
+            scatter: {
+                animation: true,
+                marker: {
+                    radius: pointRadius,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: { //http://jsfiddle.net/TkMjZ/214/
+                    headerFormat: 'Molecule: ',
+                    pointFormat: '{point.x} mm, {point.y} º'
+                }
+            }
+         },
+        series: dataset
+    });
+
+    //Results:
+    $("#plot2-count").text("Count: " + count);
+    $("#plot2-meanDist").text("Mean Distance: " + meanDist.toFixed(4));
+    $("#plot2-meanAngle").text("Mean Angle: " + meanAngle.toFixed(4));
+}
 
 //Plot3
 
