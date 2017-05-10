@@ -48,6 +48,8 @@
     line-height: 1.5em;
     color: #5d5d5d;
     font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 0px;
 }
 
 .main-header h1:after {
@@ -58,12 +60,16 @@
 }
 
 .main-body {
-  height: 500px;
+  min-height: 475px;
   margin: 20px;
 }
 
 input{
   display: none;
+}
+
+.mdl-cell > p {
+  margin: 0 0 0 0px;
 }
 
 /* -- Buttons */
