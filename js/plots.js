@@ -67,26 +67,19 @@ function generatePlot1(){
         color: 'rgba(223, 83, 83, .5)',
         data: []
     }];
-    var thresholdDist, thresholdAngle, pointRadius;
+    var thresholdDist, thresholdAngle, pointRadius, axisNameDist, unitNameDist, axisNameAngle, unitNameAngle, title;
     var sumDist = 0;
     var sumAngle = 0;
-    if($("#plot1-thresholdDist").val().trim().length === 0){
-        thresholdDist = 5;
-    }else{
-        thresholdDist = $("#plot1-thresholdDist").val();
-    }
 
-    if($("#plot1-thresholdAngle").val().trim().length === 0){
-        thresholdAngle = 30;
-    }else{
-        thresholdAngle = $("#plot1-thresholdAngle").val();
-    }
 
-    if($("#plot1-radius").val().trim().length === 0){
-        pointRadius = 5;
-    }else{
-        pointRadius = $("#plot1-radius").val();
-    }
+    title = processInput("#plot1-title",'Distance / Angle');
+    thresholdDist = processInput("#plot1-thresholdDist", 5);
+    thresholdAngle = processInput("#plot1-thresholdAngle",30);
+    pointRadius = processInput("#plot1-radius",5);
+    axisNameDist = processInput("#plot1-axisNameDist","Distance");
+    unitNameDist = processInput("#plot1-unitNameDist","Å");
+    axisNameAngle = processInput("#plot1-axisNameAngle","Angle");
+    unitNameAngle = processInput("#plot1-unitNameAngle","º");
 
     for(var i = 0; i < p1.distFile.length; i++){
         if(p1.distFile[i][1] <= thresholdDist && p1.angleFile[i][1] <= thresholdAngle){
@@ -109,12 +102,12 @@ function generatePlot1(){
             animation: true  
         },
         title: {
-            text: 'Distance / Angle'
+            text: title
         },
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Distance (Å)'
+                text: axisNameDist + " (" + unitNameDist + ")"
             },
             startOnTick: true,
             endOnTick: true,
@@ -123,7 +116,7 @@ function generatePlot1(){
         },
         yAxis: {
             title: {
-                text: 'Angle (º)'
+                text: axisNameAngle + " (" + unitNameAngle + ")"
             },
             max: thresholdAngle
         },
@@ -147,8 +140,8 @@ function generatePlot1(){
                     }
                 },
                 tooltip: {
-                    headerFormat: 'Molecule: ',
-                    pointFormat: '{point.x} Å, {point.y} º'
+                    headerFormat: 'Item: ',
+                    pointFormat: '{point.x} '+unitNameDist+', {point.y} '+ unitNameAngle
                 }
             }
          },
@@ -212,23 +205,10 @@ function generatePlot2  (){
     var thresholdDist, thresholdAngle, pointRadius;
     var sumDist = 0;
     var sumAngle = 0;
-    if($("#plot2-thresholdDist").val().trim().length === 0){
-        thresholdDist = 20;
-    }else{
-        thresholdDist = $("#plot2-thresholdDist").val();
-    }
 
-    if($("#plot2-thresholdAngle").val().trim().length === 0){
-        thresholdAngle = 30;
-    }else{
-        thresholdAngle = $("#plot2-thresholdAngle").val();
-    }
-
-    if($("#plot2-radius").val().trim().length === 0){
-        pointRadius = 5;
-    }else{
-        pointRadius = $("#plot2-radius").val();
-    }
+    thresholdDist = processInput("#plot2-thresholdDist",20);
+    thresholdAngle = processInput("#plot2-thresholdAngle",30);
+    pointRadius = processInput("#plot2-radius",5);
 
     for(var i = 0; i < p2.distFile1.length; i++){
         var sumDistTemp = p2.distFile1[i][1] + p2.distFile2[i][1];
@@ -355,23 +335,10 @@ function generatePlot3  (){
     var thresholdDist, thresholdAngle, pointRadius;
     var sumDist = 0;
     var sumAngle = 0;
-    if($("#plot3-thresholdDist").val().trim().length === 0){
-        thresholdDist = 20;
-    }else{
-        thresholdDist = $("#plot3-thresholdDist").val();
-    }
 
-    if($("#plot3-thresholdAngle").val().trim().length === 0){
-        thresholdAngle = 30;
-    }else{
-        thresholdAngle = $("#plot3-thresholdAngle").val();
-    }
-
-    if($("#plot3-radius").val().trim().length === 0){
-        pointRadius = 5;
-    }else{
-        pointRadius = $("#plot3-radius").val();
-    }
+    thresholdDist = processInput("#plot3-thresholdDist",20);
+    thresholdAngle = processInput("#plot3-thresholdAngle",30);
+    pointRadius = processInput("#plot3-pointRadius",5);
 
     for(var i = 0; i < p3.distFile1.length; i++){
         var sumDistTemp = p3.distFile1[i][1] + p3.distFile2[i][1];
@@ -536,5 +503,15 @@ function parseTextAsMatrix(text){
         }
     }
     return result;
+}
+
+function processInput(domId, defaultText){
+    var item;
+    if($(domId).val().trim().length === 0){
+        item = defaultText;
+    }else{
+        item = $(domId).val();
+    }
+    return item;
 }
 

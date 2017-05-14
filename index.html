@@ -153,26 +153,62 @@
                 <div id="d3-plot-dist-ang" class="main-body">
                 </div>
                 <div class="main-footer">
+                   <div class="mdl-grid">
+                      <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="plot1-title" class="mdl-textfield__input" type="text" />
+                            <label class="mdl-textfield__label">Plot Title</label>
+                          </div>
+                      </div>
+                    </div>
                   <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--4-col">
                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                           <input id="plot1-thresholdDist" class="mdl-textfield__input" type="text" />
                           <label class="mdl-textfield__label">Distance Threshold (default : 5)</label>
                         </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="plot1-thresholdAngle" class="mdl-textfield__input" type="text" />
+                            <label class="mdl-textfield__label">Angle Threshold (default : 50)</label>
+                          </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="plot1-radius" class="mdl-textfield__input" type="text" />
+                            <label class="mdl-textfield__label">Radius (default : 5)</label>
+                          </div>
+                      </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--4-col">
-                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input id="plot1-thresholdAngle" class="mdl-textfield__input" type="text" />
-                          <label class="mdl-textfield__label">Angle Threshold (default : 50)</label>
-                        </div>
+                    <div class="mdl-grid">
+                      <div class="mdl-cell mdl-cell--6-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="plot1-axisNameDist" class="mdl-textfield__input" type="text" />
+                            <label class="mdl-textfield__label">Distance Axis</label>
+                          </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--6-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="plot1-unitNameDist" class="mdl-textfield__input" type="text" />
+                            <label class="mdl-textfield__label">Distance Units (Å)</label>
+                          </div>
+                      </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--4-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input id="plot1-radius" class="mdl-textfield__input" type="text" />
-                          <label class="mdl-textfield__label">Radius (default : 5)</label>
-                        </div>
+                     <div class="mdl-grid">
+                      <div class="mdl-cell mdl-cell--6-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="plot1-axisNameAngle" class="mdl-textfield__input" type="text" />
+                            <label class="mdl-textfield__label">Angle Axis</label>
+                          </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--6-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="plot1-unitNameAngle" class="mdl-textfield__input" type="text" />
+                            <label class="mdl-textfield__label">Angle Units (º)</label>
+                          </div>
+                      </div>
                     </div>
-                  </div>
                   <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--4-col">
                       <input type="file" id="input-plot1-fd">
