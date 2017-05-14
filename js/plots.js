@@ -74,7 +74,7 @@ function generatePlot1(){
 
     title = processInput("#plot1-title",'Distance / Angle');
     thresholdDist = processInput("#plot1-thresholdDist", 5);
-    thresholdAngle = processInput("#plot1-thresholdAngle",30);
+    thresholdAngle = processInput("#plot1-thresholdAngle",50);
     pointRadius = processInput("#plot1-radius",5);
     axisNameDist = processInput("#plot1-axisNameDist","Distance");
     unitNameDist = processInput("#plot1-unitNameDist","Å");
@@ -202,14 +202,19 @@ function generatePlot2  (){
         color: 'rgba(223, 83, 83, .5)',
         data: []
     }];
-    var thresholdDist, thresholdAngle, pointRadius;
+    var thresholdDist, thresholdAngle, pointRadius, axisNameDist, unitNameDist, axisNameAngle, unitNameAngle, title;
     var sumDist = 0;
     var sumAngle = 0;
     var maxXAxis = 0;
 
+    title = processInput("#plot2-title",'Sum of Distances / Angle');
     thresholdDist = processInput("#plot2-thresholdDist",10);
-    thresholdAngle = processInput("#plot2-thresholdAngle",30);
+    thresholdAngle = processInput("#plot2-thresholdAngle",50);
     pointRadius = processInput("#plot2-radius",5);
+    axisNameDist = processInput("#plot2-axisNameDist","Distance");
+    unitNameDist = processInput("#plot2-unitNameDist","Å");
+    axisNameAngle = processInput("#plot2-axisNameAngle","Angle");
+    unitNameAngle = processInput("#plot2-unitNameAngle","º");
 
     for(var i = 0; i < p2.distFile1.length; i++){
         var sumDistTemp = p2.distFile1[i][1] + p2.distFile2[i][1];
@@ -235,12 +240,12 @@ function generatePlot2  (){
             animation: true  
         },
         title: {
-            text: 'Sum of Distances / Angle'
+            text: title
         },
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Distance (Å)'
+                text: axisNameDist + " (" + unitNameDist + ")"
             },
             startOnTick: true,
             endOnTick: true,
@@ -249,7 +254,7 @@ function generatePlot2  (){
         },
         yAxis: {
             title: {
-                text: 'Angle (º)'
+                text: axisNameAngle + " (" + unitNameAngle + ")"
             },
             max: thresholdAngle
         },
@@ -274,7 +279,7 @@ function generatePlot2  (){
                 },
                 tooltip: { //http://jsfiddle.net/TkMjZ/214/
                     headerFormat: 'Molecule: ',
-                    pointFormat: '{point.x} Å, {point.y} º'
+                    pointFormat: '{point.x} '+unitNameDist+', {point.y} '+ unitNameAngle
                 }
             }
          },
@@ -335,14 +340,19 @@ function generatePlot3  (){
         colorByPoint: true,
         data: []
     }];
-    var thresholdDist, thresholdAngle, pointRadius;
+    var thresholdDist, thresholdAngle, pointRadius, axisNameDist, unitNameDist, axisNameAngle, unitNameAngle, title;
     var sumDist = 0;
     var sumAngle = 0;
     var maxXAxis = 0;
 
+    title = processInput("#plot3-title",'Distances / Angle');
     thresholdDist = processInput("#plot3-thresholdDist",10);
     thresholdAngle = processInput("#plot3-thresholdAngle",30);
     pointRadius = processInput("#plot3-radius",5);
+    axisNameDist = processInput("#plot3-axisNameDist","Distance");
+    unitNameDist = processInput("#plot3-unitNameDist","Å");
+    axisNameAngle = processInput("#plot3-axisNameAngle","Angle");
+    unitNameAngle = processInput("#plot3-unitNameAngle","º");
 
     for(var i = 0; i < p3.distFile1.length; i++){
         var sumDistTemp = p3.distFile1[i][1] + p3.distFile2[i][1];
@@ -397,7 +407,7 @@ function generatePlot3  (){
             }  
         },
         title: {
-            text: 'Sum of Distances / Angle'
+            text: title
         },
         subtitle: {
             text: 'Click and drag the plot area to rotate in space'
@@ -413,21 +423,21 @@ function generatePlot3  (){
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Distance (Å)'
+                text: axisNameDist + " (" + unitNameDist + ")"
             },
             min: 0,
             max: thresholdDist
         },
         yAxis: {
             title: {
-                text: 'Angle (º)'
+                text: axisNameAngle + " (" + unitNameAngle + ")"
             },
             min: 0,
             max: thresholdAngle
         },
         zAxis: {
             title: {
-                text: 'Distance (Å)'
+               text: axisNameDist + " (" + unitNameDist + ")"
             },
             min: 0,
             max: thresholdDist,
