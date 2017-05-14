@@ -205,14 +205,18 @@ function generatePlot2  (){
     var thresholdDist, thresholdAngle, pointRadius;
     var sumDist = 0;
     var sumAngle = 0;
+    var maxXAxis = 0;
 
-    thresholdDist = processInput("#plot2-thresholdDist",20);
+    thresholdDist = processInput("#plot2-thresholdDist",10);
     thresholdAngle = processInput("#plot2-thresholdAngle",30);
     pointRadius = processInput("#plot2-radius",5);
 
     for(var i = 0; i < p2.distFile1.length; i++){
         var sumDistTemp = p2.distFile1[i][1] + p2.distFile2[i][1];
-        if(sumDistTemp <= thresholdDist && p2.angleFile[i][1] <= thresholdAngle){
+        if(p2.distFile1[i][1] <= thresholdDist && p2.distFile2[i][1] <= thresholdDist && p2.angleFile[i][1] <= thresholdAngle){
+            if(maxXAxis < sumDistTemp){
+                maxXAxis = sumDistTemp;
+            }
             dataset[0].data.push([sumDistTemp,p2.angleFile[i][1]])
             sumDist = sumDist + sumDistTemp;
             sumAngle = sumAngle + p2.angleFile[i][1];
@@ -222,7 +226,6 @@ function generatePlot2  (){
     var count = dataset[0].data.length;
     var meanDist = sumDist / count;
     var meanAngle = sumAngle / count; 
-    
 
     //Create chart
     var myChart2 = Highcharts.chart('d3-plot-distsum-ang', {
@@ -242,7 +245,7 @@ function generatePlot2  (){
             startOnTick: true,
             endOnTick: true,
             showLastLabel: true,
-            max: thresholdDist
+            max: maxXAxis
         },
         yAxis: {
             title: {
@@ -335,14 +338,15 @@ function generatePlot3  (){
     var thresholdDist, thresholdAngle, pointRadius;
     var sumDist = 0;
     var sumAngle = 0;
+    var maxXAxis = 0;
 
-    thresholdDist = processInput("#plot3-thresholdDist",20);
+    thresholdDist = processInput("#plot3-thresholdDist",10);
     thresholdAngle = processInput("#plot3-thresholdAngle",30);
-    pointRadius = processInput("#plot3-pointRadius",5);
+    pointRadius = processInput("#plot3-radius",5);
 
     for(var i = 0; i < p3.distFile1.length; i++){
         var sumDistTemp = p3.distFile1[i][1] + p3.distFile2[i][1];
-        if(sumDistTemp <= thresholdDist && p3.angleFile[i][1] <= thresholdAngle){
+        if(p3.distFile1[i][1] <= thresholdDist && p3.distFile2[i][1] <= thresholdDist && p3.angleFile[i][1] <= thresholdAngle){
             dataset[0].data.push([p3.distFile1[i][1],p3.angleFile[i][1],p3.distFile2[i][1]])
             sumDist = sumDist + sumDistTemp;
             sumAngle = sumAngle + p3.angleFile[i][1];
