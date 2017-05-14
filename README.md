@@ -4,6 +4,6 @@ Marathon project to plot and merge .log files (Lists of *frame* - *value* pairs)
 
 **Completed in:** 8 hours
 
-**Thanks To: **
+**Thanks To:**
 * Material Design Lite: https://getmdl.io/
 * Highcharts: https://www.highcharts.com/
