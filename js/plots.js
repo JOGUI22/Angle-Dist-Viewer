@@ -80,13 +80,17 @@ function generatePlot1(){
     unitNameDist = processInput("#plot1-unitNameDist","Å");
     axisNameAngle = processInput("#plot1-axisNameAngle","Angle");
     unitNameAngle = processInput("#plot1-unitNameAngle","º");
+    minFrame = processInput("#plot1-minFrame", 0);
+    maxFrame = processInput("#plot1-maxFrame", p1.distFile.length)
 
     for(var i = 0; i < p1.distFile.length; i++){
-        if(p1.distFile[i][1] <= thresholdDist && p1.angleFile[i][1] <= thresholdAngle){
-            dataset[0].data.push([p1.distFile[i][1],p1.angleFile[i][1]])
-            sumDist = sumDist + p1.distFile[i][1];
-            sumAngle = sumAngle + p1.angleFile[i][1];
-        }   
+        if(i >= minFrame && i <= maxFrame){
+            if(p1.distFile[i][1] <= thresholdDist && p1.angleFile[i][1] <= thresholdAngle){
+                dataset[0].data.push([p1.distFile[i][1],p1.angleFile[i][1]])
+                sumDist = sumDist + p1.distFile[i][1];
+                sumAngle = sumAngle + p1.angleFile[i][1];
+            }  
+        }
     }
 
     var count = dataset[0].data.length;
